@@ -1,0 +1,28 @@
+# Ignorar archivos generados automáticamente
+obj/
+bin/
+*.user
+*.vs/
+
+# Ignorar archivos de compilación
+*.dll
+*.pdb
+*.exe
+
+# Ignorar archivos de configuración específicos del entorno
+*.suo
+*.cache
+*.sln.docstates
+*.userprefs
+
+# Ignorar archivos de caché y respaldo
+[Tt]humbs.db
+*.DS_Store
+*.log
+*.bak
+*.cache
+
+# Ignorar archivos de dependencias y paquetes de NuGet
+packages/
+*.nupkg
+*.paket/
