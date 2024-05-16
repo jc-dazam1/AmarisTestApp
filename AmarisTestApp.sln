@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmarisTestApp", "AmarisTestApp.csproj", "{06CD3E14-992E-4E10-AE3B-35EB27F68D98}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmarisTestAppUnitTest", "..\AmarisTestAppUnitTest\AmarisTestAppUnitTest.csproj", "{F2224DCB-A6DE-40C3-B508-BF697F0B9849}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmarisTestAppUnitTest", "AmarisTestAppUnitTest\AmarisTestAppUnitTest.csproj", "{F2224DCB-A6DE-40C3-B508-BF697F0B9849}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
