@@ -10,7 +10,7 @@ namespace AmarisTestApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class EmployeeController : ControllerBase, IEmployeeApiClient, IEmployeeController
     {
         private readonly EmployeeApiClient _employeeService;
 
@@ -43,8 +43,15 @@ namespace AmarisTestApp.Controllers
             return employee;
         }
 
+        public Task<List<Employee>> GetAllEmployeesAsync()
+        {
+            throw new NotImplementedException();
+        }
 
-      
+        public Task<Employee> GetEmployeeByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

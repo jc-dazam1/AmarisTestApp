@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using AmarisTestApp.DataAccess;
 using AmarisTestApp.BusinessLogic;
+using AmarisTestApp.Controllers;
 
 namespace AmarisTestApp
 {
@@ -24,7 +25,7 @@ namespace AmarisTestApp
                 {
                     // Registra EmployeeApiClient como un servicio
                     services.AddScoped<EmployeeApiClient>();
-                    services.AddScoped<EmployeeBusinessLogic>();
+                    services.AddScoped<IEmployeeController, EmployeeController>();
                 });
     }
 }

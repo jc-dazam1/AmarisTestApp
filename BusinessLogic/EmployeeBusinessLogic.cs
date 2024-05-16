@@ -6,11 +6,11 @@ namespace AmarisTestApp.BusinessLogic
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeBusinessLogic : ControllerBase
+    public class EmployeeBusinessLogic : ControllerBase, IEmployeeBusinessLogic
     {
-        private readonly EmployeeController _employeeController;
+        private readonly IEmployeeController _employeeController;
 
-        public EmployeeBusinessLogic(EmployeeController employeeController)
+        public EmployeeBusinessLogic(IEmployeeController employeeController)
         {
             _employeeController = employeeController;
         }
@@ -35,6 +35,11 @@ namespace AmarisTestApp.BusinessLogic
                 // Handle error response
                 throw new Exception($"Failed to retrieve employee {id}. Status code: {employeeResponse.Result}");
             }
+        }
+
+        public Task<int> CalculateAnnualSalary()
+        {
+            throw new NotImplementedException();
         }
     }
 }
