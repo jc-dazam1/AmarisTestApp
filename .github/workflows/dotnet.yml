@@ -26,4 +26,4 @@ jobs:
       working-directory: ./AmarisTestAppUnitTest
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: AmarisTestAppUnitTest/bin/Release/net8.0/AmarisTestAppUnitTest.dll
+      working-directory: bin/Debug/net8.0/AmarisTestApp.dll
