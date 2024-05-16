@@ -22,3 +22,9 @@ jobs:
     - name: Build Solution
       run: dotnet build --configuration Release
       working-directory: ./AmarisTestApp
+    - name: Build Unit Tests
+      run: dotnet build --configuration Release
+      working-directory: ./AmarisTestAppUnitTest
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+
