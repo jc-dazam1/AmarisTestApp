@@ -1,7 +1,9 @@
 ﻿namespace AmarisTestApp.DataAccess
 {
+    using AmarisTestApp.Models;
     using System;
     using System.Net.Http;
+    using System.Text.Json;
     using System.Threading.Tasks;
 
     public class EmployeeApiClient
@@ -18,16 +20,20 @@
         /// Method to get all employees 
         /// </summary>
         /// <returns></returns>
-        public async Task<string> GetAllEmployeesAsync()
+        public async Task<List<Employee>> GetAllEmployeesAsync()
         {
             HttpResponseMessage response = await _httpClient.GetAsync("employees");
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsStringAsync();
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<EmployeeApiResponse>(content);
+                List<Employee> resultList = [.. result?.Data];
+                return resultList;
             }
             else
             {
-                return null; // Handle error
+                // Handle error response
+                throw new HttpRequestException($"Failed to retrieve employees. Status code: {response.StatusCode}");
             }
         }
 
@@ -36,16 +42,21 @@
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<string> GetEmployeeByIdAsync(int id)
+        public async Task<Employee>? GetEmployeeByIdAsync(int id)
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"employee/{id}");
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsStringAsync();
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<EmployeeApiResponse>(content);
+
+                Employee foundEmployee = result.Data.FirstOrDefault(e => e.Id == id);
+                return foundEmployee;
             }
             else
             {
-                return null; // Handle error
+                // Handle error response
+                throw new HttpRequestException($"Failed to retrieve employee {id}. Status code: {response.StatusCode}");
             }
         }
     }
