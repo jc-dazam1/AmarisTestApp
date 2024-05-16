@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include=".\AmarisTestApp.csproj" />
+    <ProjectReference Include="..\AmarisTestApp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
