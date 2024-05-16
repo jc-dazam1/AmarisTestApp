@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AmarisTestApp.BusinessLogic
 {
-    public class EmployeeBusinessLogic
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EmployeeBusinessLogic : ControllerBase
     {
         private readonly EmployeeController _employeeController;
 
@@ -18,31 +20,21 @@ namespace AmarisTestApp.BusinessLogic
         /// </summary>
         /// <param name="idEmployee"></param>
         /// <returns></returns>
-        public async Task<decimal> CalculateAnnualSalary(int idEmployee)
+        [HttpGet("{id}/annual-salary")]
+        public async Task<int> CalculateAnnualSalary(int id)
         {
-            var employeeResponse = await _employeeController.GetEmployee(idEmployee);
+            var employeeResponse = await _employeeController.GetEmployee(id);
 
-            if (employeeResponse.Result is OkObjectResult)
+            if (employeeResponse.Value != null)
             {
-                var employee = (employeeResponse.Result as OkObjectResult).Value as Employee;
-                return CalculateAnnualSalary(employee.EmployeeSalary);
+                var employee = employeeResponse.Value as Employee;
+                return employee.Employee_salary * 12;
             }
             else
             {
                 // Handle error response
-                throw new Exception($"Failed to retrieve employee {idEmployee}. Status code: {employeeResponse.Result}");
+                throw new Exception($"Failed to retrieve employee {id}. Status code: {employeeResponse.Result}");
             }
-        }
-
-        /// <summary>
-        /// Calculate the annual Salary
-        /// </summary>
-        /// <param name="monthlySalary"></param>
-        /// <returns></returns>
-        public decimal CalculateAnnualSalary(decimal monthlySalary)
-        {
-            // Calcula el salario anual multiplicando el salario mensual por 12
-            return monthlySalary * 12;
         }
     }
 }
