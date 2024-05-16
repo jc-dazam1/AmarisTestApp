@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AmarisTestApp.csproj" />
-    <ProjectReference Include="..\AmarisTestApp\AmarisTestApp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
