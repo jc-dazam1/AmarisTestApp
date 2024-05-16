@@ -20,7 +20,7 @@ function loadEmployeeList() {
         type: 'GET',
         success: function (data) {
             // Obtener una lista de promesas para calcular el salario anual de cada empleado
-            /*var promises = data.map(employee => calculateAnnualSalary(employee.id));
+            var promises = data.map(employee => calculateAnnualSalary(employee.id));
 
             // Esperar a que todas las promesas se resuelvan
             Promise.all(promises)
@@ -37,7 +37,7 @@ function loadEmployeeList() {
                     console.error('Error al calcular los salarios anuales:', error);
                     $('#employeeInfo').html('Error al calcular los salarios anuales.');
                 });
-                */
+               
             displayEmployeeInfo(data);
         },
         error: function () {
@@ -68,21 +68,11 @@ function displayEmployeeInfo(data) {
     $('#employeeInfo').empty();
 
     // Verificar si hay datos de empleado para mostrar
-
-    if (data) {
+    if (data && data.length > 0) {
         // Definir la cantidad de elementos por página
-
         var itemsPerPage = 8;
-        var totalPages = 0;
-        if (data.length > 1) {
+        var totalPages = Math.ceil(data.length / itemsPerPage);
 
-            totalPages = Math.ceil(data.length / itemsPerPage);
-        } else {
-            data = convertToArray(data);
-            totalPages = 1;
-        }
-        
-        console.log("totalPages", totalPages)
         // Crear una tabla con formato utilizando Bootstrap
         var table = $('<table>').addClass('table table-striped');
         var thead = $('<thead>').append(
@@ -101,12 +91,14 @@ function displayEmployeeInfo(data) {
         var endIndex = Math.min(itemsPerPage, data.length);
         for (var i = startIndex; i < endIndex; i++) {
             var employee = data[i];
+            // Formatear salario y salario anual como monedas
+            var formattedSalary = employee.employee_salary.toLocaleString('es-ES', { style: 'currency', currency: 'USD' });
+            var formattedAnnualSalary = (employee.employee_salary * 12).toLocaleString('es-ES', { style: 'currency', currency: 'USD' });
             var row = $('<tr>').append(
                 $('<td>').text(employee.id),
                 $('<td>').text(employee.employee_name),
-                $('<td>').text(employee.employee_salary),
-                //$('<td>').text(employee.annual_salary),
-                $('<td>').text(employee.employee_salary*12),
+                $('<td>').text(formattedSalary),
+                $('<td>').text(formattedAnnualSalary),
                 $('<td>').text(employee.employee_age)
             );
             tbody.append(row);
@@ -143,11 +135,14 @@ function displayEmployeeInfo(data) {
             tbody.empty();
             for (var i = startIndex; i < endIndex; i++) {
                 var employee = data[i];
+                // Formatear salario y salario anual como monedas
+                var formattedSalary = employee.employee_salary.toLocaleString('es-ES', { style: 'currency', currency: 'USD' });
+                var formattedAnnualSalary = (employee.employee_salary * 12).toLocaleString('es-ES', { style: 'currency', currency: 'USD' });
                 var row = $('<tr>').append(
                     $('<td>').text(employee.id),
                     $('<td>').text(employee.employee_name),
-                    $('<td>').text(employee.employee_salary),
-                    $('<td>').text(employee.employee_salary * 12),
+                    $('<td>').text(formattedSalary),
+                    $('<td>').text(formattedAnnualSalary),
                     $('<td>').text(employee.employee_age)
                 );
                 tbody.append(row);
