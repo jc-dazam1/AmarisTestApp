@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AmarisTestAppUnitTest\**" />
+    <Content Remove="AmarisTestAppUnitTest\**" />
+    <EmbeddedResource Remove="AmarisTestAppUnitTest\**" />
+    <None Remove="AmarisTestAppUnitTest\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Remote.Linq.Newtonsoft.Json" Version="7.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.6.1" />
